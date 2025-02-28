@@ -1,0 +1,689 @@
+{
+  "36": {
+    "inputs": {
+      "key": "image",
+      "value": [
+        "58",
+        0
+      ]
+    },
+    "class_type": "parameter_function",
+    "_meta": {
+      "title": "参数字典函数"
+    }
+  },
+  "38": {
+    "inputs": {
+      "JSON": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "json2text",
+    "_meta": {
+      "title": "JSON转文本"
+    }
+  },
+  "40": {
+    "inputs": {
+      "text": [
+        "67",
+        0
+      ]
+    },
+    "class_type": "show_text_party",
+    "_meta": {
+      "title": "显示文本"
+    }
+  },
+  "44": {
+    "inputs": {
+      "system_prompt": "",
+      "user_prompt": "",
+      "temperature": 0.7,
+      "is_memory": "disable",
+      "is_tools_in_sys_prompt": "disable",
+      "is_locked": "disable",
+      "main_brain": "enable",
+      "max_length": 1920,
+      "system_prompt_input": [
+        "46",
+        0
+      ],
+      "user_prompt_input": [
+        "49",
+        0
+      ],
+      "imgbb_api_key": "",
+      "conversation_rounds": 100,
+      "historical_record": "",
+      "is_enable": true,
+      "img_URL": "",
+      "model": [
+        "90",
+        0
+      ],
+      "extra_parameters": [
+        "48",
+        0
+      ]
+    },
+    "class_type": "LLM",
+    "_meta": {
+      "title": "☁️API LLM通用链路"
+    }
+  },
+  "46": {
+    "inputs": {
+      "input_string": "# 1.角色：\n你是一个调酒专家，调酒就是基于一款基酒和多种配酒（包括利口酒、调味汁和软饮）混合而成一款符合酒精（也可以无酒精）饮料。\n\n# 2.任务\n你的任务是通过用户的MBTI、星座、酒精度和当日的心情来使用以上的调酒技巧来帮用户调制一款酒。你在调酒的过程中，除了调酒的原料需要从以下的知识库中搜索，在实际调酒的比例上，你可以自己发挥。根据酒精度控制每个酒的比例。（调酒的比例如下：基酒30%-45% 利口酒10% 调味汁0%-5% 软饮40%-60%）。\n## 请注意：\n（1）如果酒精度是0%，基酒输出为：基酒：无。利口酒输出为：利口酒：无。\n（2）一款酒的总容量为200ml，按照比例分配，利口酒可以降低比例，有的酒不需要利口酒，就可以用0ml。\n你最后需要产出的信息示例可以参考以下信息，使用json格式输出：\n## 1.配料清单\n- 基酒：豪帅银标龙舌兰/哥顿金酒/百加得白朗姆/深蓝伏特加（任选一款） 30ml\n- 利口酒：薄荷利口酒/君度力娇酒（任选一款） 10ml\n- 调味汁：红石榴糖 浆/屈臣氏柠檬汁(青柠)/莫林甘蔗糖浆（任选一款） 0—5 ml\n- 软饮：水溶C/椰奶/芬达（橙味）/芬达（西瓜）/多肉莓莓/鲜榨红心芭乐/康师傅乌龙茶/可乐/橙汁/菠萝汁（任选一款） 15ml\n\n## 2.文本信息\n- 调酒名称：「根据以上的配比起一个名字」，文字需要具有文学性，例如：仲夏夜之梦,琥珀星轨,苔丝之泪,雪松雾凇，温柔暴风雪,昭和霓虹,赫柏之盅。（六个字以内）\n- 用户名称：科林Cypilgrim\n- MBTI：INFJ\n- 人格：I型人格（如果是\"E\"开头的人格则为E型人格，如ENTJ就是E型人格）\n- 星座：双子座\n- 当日心情：激情四射\n- 酒精偏好：我还是个孩子，还不能饮酒（酒精度0%） 备注：括号前的语言根据酒精度的高低来写一个幽默的话，改内容不需要显示出来。\n\n# 3. 以下是你在调用调酒知识库的信息\n## 1.基酒\n- 绝对伏特加\n- 百加得白朗姆\n- 哥顿金酒\n- 豪帅银标龙舌兰\n- 波本威士忌\n## 2.利口酒\n- 君度力娇酒\n- 波士顿蓝橙力娇酒\n- 薄荷利口酒\n## 3.调味汁\n- 屈臣氏柠檬汁(青柠)\n- 红石榴糖浆\n- 莫林甘蔗糖浆\n## 4.软饮\n- 水溶C\n- 可乐\n- 菠萝汁\n- 橙汁\n- 椰奶\n- 康师傅乌龙茶\n- 味全梅梅桃桃果汁\n- 元气森林葡萄味气泡水\n\n# 4.限制\n你在调酒的过程中，必须调用我给定的知识库的信息，不用按照我的示例来进行调酒。不能从这之外的信息来调酒。记住以上我的举例仅供参考，具体的调酒参数你自己发挥，用户名称也根据输入的信息来。"
+    },
+    "class_type": "get_string",
+    "_meta": {
+      "title": "输入字符串"
+    }
+  },
+  "47": {
+    "inputs": {
+      "text": [
+        "44",
+        0
+      ]
+    },
+    "class_type": "show_text_party",
+    "_meta": {
+      "title": "显示文本"
+    }
+  },
+  "48": {
+    "inputs": {
+      "json_out": true,
+      "n": 1,
+      "stop": "",
+      "presence_penalty": 0,
+      "frequency_penalty": 0,
+      "repetition_penalty": 1,
+      "min_length": 0,
+      "logprobs": false,
+      "echo": false,
+      "best_of": 1,
+      "user": "",
+      "top_p": 1,
+      "top_k": 50,
+      "seed": 1315
+    },
+    "class_type": "extra_parameters",
+    "_meta": {
+      "title": "额外模型参数"
+    }
+  },
+  "49": {
+    "inputs": {
+      "is_enable": true,
+      "prompt": "我叫{姓名}，我是一个{MBTI}，我是{星座}，我今天的心情是：{今日心情}，我的酒精度接受为{酒精度}。请你基于此帮我调一款我的酒",
+      "prompt_template": [
+        "50",
+        0
+      ]
+    },
+    "class_type": "custom_persona",
+    "_meta": {
+      "title": "自定义面具"
+    }
+  },
+  "50": {
+    "inputs": {
+      "JSON": [
+        "55",
+        0
+      ]
+    },
+    "class_type": "json2text",
+    "_meta": {
+      "title": "JSON转文本"
+    }
+  },
+  "51": {
+    "inputs": {
+      "key": "姓名",
+      "value": [
+        "57",
+        0
+      ]
+    },
+    "class_type": "parameter_function",
+    "_meta": {
+      "title": "参数字典函数"
+    }
+  },
+  "52": {
+    "inputs": {
+      "key": "MBTI",
+      "value": [
+        "58",
+        0
+      ]
+    },
+    "class_type": "parameter_function",
+    "_meta": {
+      "title": "参数字典函数"
+    }
+  },
+  "53": {
+    "inputs": {
+      "key": "星座",
+      "value": [
+        "59",
+        0
+      ]
+    },
+    "class_type": "parameter_function",
+    "_meta": {
+      "title": "参数字典函数"
+    }
+  },
+  "54": {
+    "inputs": {
+      "key": "今日心情",
+      "value": [
+        "60",
+        0
+      ]
+    },
+    "class_type": "parameter_function",
+    "_meta": {
+      "title": "参数字典函数"
+    }
+  },
+  "55": {
+    "inputs": {
+      "parameter1": [
+        "51",
+        0
+      ],
+      "parameter2": [
+        "52",
+        0
+      ],
+      "parameter3": [
+        "53",
+        0
+      ],
+      "parameter4": [
+        "54",
+        0
+      ],
+      "parameter5": [
+        "56",
+        0
+      ]
+    },
+    "class_type": "parameter_combine_plus",
+    "_meta": {
+      "title": "超大参数字典组合"
+    }
+  },
+  "56": {
+    "inputs": {
+      "key": "酒精度",
+      "value": [
+        "61",
+        0
+      ]
+    },
+    "class_type": "parameter_function",
+    "_meta": {
+      "title": "参数字典函数"
+    }
+  },
+  "57": {
+    "inputs": {
+      "input_string": "$NAME"
+    },
+    "class_type": "get_string",
+    "_meta": {
+      "title": "姓名"
+    }
+  },
+  "58": {
+    "inputs": {
+      "input_string": "$MBTI"
+    },
+    "class_type": "get_string",
+    "_meta": {
+      "title": "MBTI"
+    }
+  },
+  "59": {
+    "inputs": {
+      "input_string": "$STAR"
+    },
+    "class_type": "get_string",
+    "_meta": {
+      "title": "星座"
+    }
+  },
+  "60": {
+    "inputs": {
+      "input_string": "$EMOJI"
+    },
+    "class_type": "get_string",
+    "_meta": {
+      "title": "今日心情"
+    }
+  },
+  "61": {
+    "inputs": {
+      "input_string": "$ALCOHOL"
+    },
+    "class_type": "get_string",
+    "_meta": {
+      "title": "酒精度"
+    }
+  },
+  "67": {
+    "inputs": {
+      "is_enable": true,
+      "string": "/hy-tmp/AI_files/AI-Wine/person_icon/{image}.png",
+      "string_template": [
+        "38",
+        0
+      ]
+    },
+    "class_type": "custom_string_format",
+    "_meta": {
+      "title": "自定义字符串格式化"
+    }
+  },
+  "68": {
+    "inputs": {
+      "text": [
+        "47",
+        0
+      ],
+      "key": "配料清单",
+      "is_enable": true
+    },
+    "class_type": "json_get_value",
+    "_meta": {
+      "title": "JSON取值🐶"
+    }
+  },
+  "69": {
+    "inputs": {
+      "text": [
+        "68",
+        0
+      ]
+    },
+    "class_type": "show_text_party",
+    "_meta": {
+      "title": "显示文本"
+    }
+  },
+  "70": {
+    "inputs": {
+      "text": [
+        "47",
+        0
+      ],
+      "key": "文本信息",
+      "is_enable": true
+    },
+    "class_type": "json_get_value",
+    "_meta": {
+      "title": "JSON取值🐶"
+    }
+  },
+  "71": {
+    "inputs": {
+      "text": [
+        "70",
+        0
+      ]
+    },
+    "class_type": "show_text_party",
+    "_meta": {
+      "title": "显示文本"
+    }
+  },
+  "72": {
+    "inputs": {
+      "is_enable": true,
+      "string": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>玩聚海报卡片</title>\n    <style>\n        @font-face {\n            font-family: 'FusionPixel';\n            src: url('file:///hy-tmp/AI_files/AI-Wine/缝合像素字体/简体中文/等宽模式/fusion-pixel-10px-monospaced-zh_hans.otf') format('opentype');\n        }\n\n        body, html {\n            margin: 0;\n            padding: 0;\n            height: 100%;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            background-color: #f0f0f0;\n        }\n        .card {\n            width: 974px;\n            height: 1576px;\n            background-image: url('file:///hy-tmp/AI_files/AI-Wine/hb.png');\n            background-size: cover;\n            background-position: center;\n            box-shadow: 0 4px 8px rgba(0,0,0,0.1);\n            position: relative;\n            overflow: hidden;\n        }\n        .bottom-image {\n            position: absolute;\n            bottom: 0;\n            left: 0;\n            width: 100%;\n            height: auto;\n            z-index: 1;\n        }\n        .top-image {\n            position: absolute;\n            bottom: 0;\n            left: 0;\n            width: 974px;\n            height: auto;\n            z-index: 2;\n        }\n        .text-container {\n            position: absolute;\n            top: 541px;\n            left: 187px;\n            width: 42px;\n            height: 152px;\n            display: flex;\n            justify-content: center;\n            align-items: flex-start; /* 修改为顶部对齐 */\n            overflow: hidden;\n            z-index: 3;\n        }\n        .vertical-text {\n            writing-mode: vertical-rl;\n            text-orientation: upright;\n            white-space: nowrap;\n            color: #fff; /* 修改字体颜色为白色 */\n            max-height: 100%;\n            max-width: 100%;\n            text-align: center;\n            display: flex;\n            align-items: flex-start; /* 修改为顶部对齐 */\n            justify-content: center;\n            font-family: 'FusionPixel', sans-serif;\n        }\n        .small-text-container {\n            position: absolute;\n            top: 541px;\n            left: 137px;\n            width: 30px;\n            height: 152px;\n            display: flex;\n            justify-content: center;\n            align-items: flex-start; /* 修改为顶部对齐 */\n            overflow: hidden;\n            z-index: 3;\n        }\n        .small-vertical-text {\n            writing-mode: vertical-rl;\n            text-orientation: upright;\n            white-space: nowrap;\n            color: #fff; /* 修改字体颜色为白色 */\n            max-height: 100%;\n            max-width: 100%;\n            text-align: center;\n            display: flex;\n            align-items: flex-start; /* 修改为顶部对齐 */\n            justify-content: center;\n            font-size: 22px;\n            font-family: 'FusionPixel', sans-serif;\n        }\n        .status-text-container {\n            position: absolute;\n            top: 541px;\n            left: 87px;\n            width: 30px;\n            height: 152px;\n            display: flex;\n            justify-content: center;\n            align-items: flex-start; /* 修改为顶部对齐 */\n            overflow: hidden;\n            z-index: 3;\n        }\n        .status-vertical-text {\n            writing-mode: vertical-rl;\n            text-orientation: upright;\n            white-space: nowrap;\n            color: #fff; /* 修改字体颜色为白色 */\n            max-height: 100%;\n            max-width: 100%;\n            text-align: center;\n            display: flex;\n            align-items: flex-start; /* 修改为顶部对齐 */\n            justify-content: center;\n            font-size: 20px;\n            font-family: 'FusionPixel', sans-serif;\n        }\n        .e-image {\n            position: absolute;\n            top: 710px;\n            left: 87px;\n            width: 142px;\n            height: auto;\n            z-index: 3;\n        }\n        .e-type-container {\n            position: absolute;\n            top: 865px; /* Adjust this value based on the height of E.png */\n            left: 87px;\n            width: 142px;\n            height: 50px;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            overflow: hidden;\n            z-index: 3;\n        }\n        .e-type-text {\n            color: #000;\n            font-size: 35px;\n            text-align: center;\n            font-family: 'FusionPixel', sans-serif;\n        }\n        .infp-image {\n            position: absolute;\n            top: 360px; /* 541px - 152px */\n            left: 15px;\n            width: 300px;\n            height: auto;\n            z-index: 3;\n        }\n        .morning-text-container {\n            position: absolute;\n            top: 600px;\n            left: 825px;\n            width: 60px;\n            height: 255px;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            overflow: hidden;\n            z-index: 3;\n        }\n        .morning-vertical-text {\n            writing-mode: vertical-rl;\n            text-orientation: upright;\n            white-space: nowrap;\n            color: #000;\n            max-height: 100%;\n            max-width: 100%;\n            text-align: center;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            font-size: 42px;\n            font-family: 'FusionPixel', sans-serif;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"card\">\n        <img src=\"file:///{bg}\" alt=\"底图\" class=\"bottom-image\">\n        <img src=\"file:///hy-tmp/AI_files/AI-Wine/hb.png\" alt=\"hp\" class=\"top-image\">\n        <img src=\"file:///{16img}\" alt=\"INFP\" class=\"infp-image\">\n        <div class=\"status-text-container\">\n            <div class=\"status-vertical-text\" id=\"statusAdaptiveText\">状态/{当日心情}</div>\n        </div>\n        <div class=\"small-text-container\">\n            <div class=\"small-vertical-text\" id=\"smallAdaptiveText\">星座/{星座}</div>\n        </div>\n        <div class=\"text-container\">\n            <div class=\"vertical-text\" id=\"adaptiveText\">{用户名称}</div>\n        </div>\n        <img src=\"file:///{EorI}\" alt=\"E\" class=\"e-image\">\n        <div class=\"e-type-container\">\n            <div class=\"e-type-text\" id=\"eTypeText\">{MBTI}</div>\n        </div>\n        <div class=\"morning-text-container\">\n            <div class=\"morning-vertical-text\" id=\"morningAdaptiveText\">「{调酒名称}」</div>\n        </div>\n    </div>\n    <script>\n        function adjustFontSize(containerId, textId, maxFontSize) {\n            const container = document.getElementById(containerId);\n            const text = document.getElementById(textId);\n            let minFontSize = 1;\n            let currentFontSize;\n\n            while (minFontSize <= maxFontSize) {\n                currentFontSize = Math.floor((minFontSize + maxFontSize) / 2);\n                text.style.fontSize = currentFontSize + 'px';\n\n                if (text.scrollWidth <= container.clientWidth && text.scrollHeight <= container.clientHeight && text.offsetWidth <= container.clientWidth) {\n                    minFontSize = currentFontSize + 1;\n                } else {\n                    maxFontSize = currentFontSize - 1;\n                }\n            }\n\n            text.style.fontSize = maxFontSize + 'px';\n        }\n\n        function adjustAllText() {\n            adjustFontSize('text-container', 'adaptiveText', 90);\n            adjustFontSize('small-text-container', 'smallAdaptiveText', 90);\n            adjustFontSize('status-text-container', 'statusAdaptiveText', 80);\n            adjustFontSize('e-type-container', 'eTypeText', 40);\n            adjustFontSize('morning-text-container', 'morningAdaptiveText', 60);\n        }\n\n        window.onload = adjustAllText;\n        window.onresize = adjustAllText;\n    </script>\n</body>\n</html>\n",
+      "string_template": [
+        "93",
+        0
+      ]
+    },
+    "class_type": "custom_string_format",
+    "_meta": {
+      "title": "自定义字符串格式化"
+    }
+  },
+  "76": {
+    "inputs": {
+      "text": [
+        "71",
+        0
+      ]
+    },
+    "class_type": "text2parameters",
+    "_meta": {
+      "title": "文本转参数"
+    }
+  },
+  "78": {
+    "inputs": {
+      "option": "A contain B",
+      "stringA": [
+        "58",
+        0
+      ],
+      "stringB": "E"
+    },
+    "class_type": "string_logic",
+    "_meta": {
+      "title": "字符串逻辑"
+    }
+  },
+  "79": {
+    "inputs": {
+      "is_enable": [
+        "78",
+        2
+      ],
+      "string": "/hy-tmp/AI_files/AI-Wine/EorI/{image}.png",
+      "string_template": [
+        "82",
+        0
+      ]
+    },
+    "class_type": "custom_string_format",
+    "_meta": {
+      "title": "自定义字符串格式化"
+    }
+  },
+  "81": {
+    "inputs": {
+      "is_enable": [
+        "78",
+        3
+      ],
+      "string": "/hy-tmp/AI_files/AI-Wine/EorI/{image}.png",
+      "string_template": [
+        "83",
+        0
+      ]
+    },
+    "class_type": "custom_string_format",
+    "_meta": {
+      "title": "自定义字符串格式化"
+    }
+  },
+  "82": {
+    "inputs": {
+      "input_string": "{\"image\":\"E\"}"
+    },
+    "class_type": "get_string",
+    "_meta": {
+      "title": "E"
+    }
+  },
+  "83": {
+    "inputs": {
+      "input_string": "{\"image\":\"I\"}"
+    },
+    "class_type": "get_string",
+    "_meta": {
+      "title": "I"
+    }
+  },
+  "86": {
+    "inputs": {
+      "key": "EorI",
+      "value": [
+        "81",
+        0
+      ]
+    },
+    "class_type": "parameter_function",
+    "_meta": {
+      "title": "参数字典函数"
+    }
+  },
+  "87": {
+    "inputs": {
+      "key": "16img",
+      "value": [
+        "40",
+        0
+      ]
+    },
+    "class_type": "parameter_function",
+    "_meta": {
+      "title": "参数字典函数"
+    }
+  },
+  "88": {
+    "inputs": {
+      "html_str": [
+        "72",
+        0
+      ],
+      "width": 974,
+      "height": 1576,
+      "is_enable": true
+    },
+    "class_type": "html2img_function",
+    "_meta": {
+      "title": "HTML转图片"
+    }
+  },
+  "89": {
+    "inputs": {
+      "images": [
+        "88",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "90": {
+    "inputs": {
+      "model_name": "qwen-max-latest",
+      "base_url": "",
+      "api_key": "",
+      "is_ollama": false
+    },
+    "class_type": "LLM_api_loader",
+    "_meta": {
+      "title": "☁️API LLM加载器"
+    }
+  },
+  "93": {
+    "inputs": {
+      "text": [
+        "106",
+        0
+      ]
+    },
+    "class_type": "show_text_party",
+    "_meta": {
+      "title": "显示文本"
+    }
+  },
+  "94": {
+    "inputs": {
+      "is_enable": true,
+      "string": "/hy-tmp/AI_files/AI-Wine/bg/{image}.png",
+      "string_template": [
+        "38",
+        0
+      ]
+    },
+    "class_type": "custom_string_format",
+    "_meta": {
+      "title": "自定义字符串格式化"
+    }
+  },
+  "97": {
+    "inputs": {
+      "key": "bg",
+      "value": [
+        "94",
+        0
+      ]
+    },
+    "class_type": "parameter_function",
+    "_meta": {
+      "title": "参数字典函数"
+    }
+  },
+  "98": {
+    "inputs": {
+      "parameter1": [
+        "76",
+        0
+      ],
+      "parameter2": [
+        "87",
+        0
+      ],
+      "parameter3": [
+        "86",
+        0
+      ],
+      "parameter4": [
+        "97",
+        0
+      ]
+    },
+    "class_type": "parameter_combine_plus",
+    "_meta": {
+      "title": "超大参数字典组合"
+    }
+  },
+  "106": {
+    "inputs": {
+      "JSON": [
+        "98",
+        0
+      ]
+    },
+    "class_type": "json2text",
+    "_meta": {
+      "title": "JSON转文本"
+    }
+  },
+  "107": {
+    "inputs": {
+      "is_enable": true,
+      "string": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>反面</title>\n    <style>\n        @font-face {\n            font-family: 'FusionPixel';\n            src: url('file:///Users/huangyuchuh/Downloads/AI-Wine/缝合像素字体/简体中文/等宽模式/fusion-pixel-10px-monospaced-zh_hans.otf') format('opentype');\n        }\n\n        body, html {\n            margin: 0;\n            padding: 0;\n            height: 100%;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            background-color: #f0f0f0;\n        }\n        .card {\n            width: 974px;\n            height: 1576px;\n            background-image: url('file:///hy-tmp/AI_files/AI-Wine/hb3.png');\n            background-size: cover;\n            background-position: center;\n            box-shadow: 0 4px 8px rgba(0,0,0,0.1);\n            position: relative;\n            overflow: hidden;\n        }\n        .text-container {\n            position: absolute;\n            top: 350px; /* Adjust this value to place the text above the white line */\n            left: 30%; /* Left align the text */\n            transform: translateX(-50%);\n            color: white;\n            font-family: 'FusionPixel', sans-serif;\n            font-size: 60px;\n            text-align: center;\n            z-index: 3;\n        }\n        .base-spirit-container {\n            position: absolute;\n            top: 450px; /* Adjust this value to place the base spirit below the cocktail name */\n            left: 10%; /* Left align the text */\n            color: white;\n            font-family: 'FusionPixel', sans-serif;\n            font-size: 50px;\n            text-align: left;\n            z-index: 3;\n        }\n        .ingredients-container {\n            position: absolute;\n            top: 530px; /* Adjust this value to place the ingredients below the base spirit */\n            left: 10%; /* Left align the text */\n            color: white;\n            font-family: 'FusionPixel', sans-serif;\n            font-size: 45px;\n            text-align: left;\n            line-height: 1.4; /* Increase line height for better spacing */\n            z-index: 3;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"card\">\n        <div class=\"text-container\">「{调酒名称}」</div>\n        <div class=\"base-spirit-container\">基酒：{基酒}</div>\n        <div class=\"ingredients-container\">\n            利口酒：{利口酒}<br>\n            调味汁：{调味汁}<br>\n            软饮：{软饮}\n        </div>\n    </div>\n</body>\n</html>\n",
+      "string_template": [
+        "114",
+        0
+      ]
+    },
+    "class_type": "custom_string_format",
+    "_meta": {
+      "title": "自定义字符串格式化"
+    }
+  },
+  "108": {
+    "inputs": {
+      "html_str": [
+        "107",
+        0
+      ],
+      "width": 974,
+      "height": 1576,
+      "is_enable": true
+    },
+    "class_type": "html2img_function",
+    "_meta": {
+      "title": "HTML转图片"
+    }
+  },
+  "109": {
+    "inputs": {
+      "images": [
+        "108",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "110": {
+    "inputs": {
+      "text": [
+        "71",
+        0
+      ],
+      "key": "调酒名称",
+      "is_enable": true
+    },
+    "class_type": "json_get_value",
+    "_meta": {
+      "title": "JSON取值🐶"
+    }
+  },
+  "111": {
+    "inputs": {
+      "key": "调酒名称",
+      "value": [
+        "110",
+        0
+      ]
+    },
+    "class_type": "parameter_function",
+    "_meta": {
+      "title": "参数字典函数"
+    }
+  },
+  "112": {
+    "inputs": {
+      "parameter1": [
+        "111",
+        0
+      ],
+      "parameter2": [
+        "113",
+        0
+      ]
+    },
+    "class_type": "parameter_combine",
+    "_meta": {
+      "title": "参数字典组合"
+    }
+  },
+  "113": {
+    "inputs": {
+      "text": [
+        "69",
+        0
+      ]
+    },
+    "class_type": "text2parameters",
+    "_meta": {
+      "title": "文本转参数"
+    }
+  },
+  "114": {
+    "inputs": {
+      "JSON": [
+        "112",
+        0
+      ]
+    },
+    "class_type": "json2text",
+    "_meta": {
+      "title": "JSON转文本"
+    }
+  }
+}
