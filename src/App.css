@@ -6,6 +6,13 @@
 }
 
 .user-inputs {
+  width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input-group{
   width: 300px;
 }
 
@@ -95,4 +102,14 @@ h1 {
 p {
   margin-bottom: 2rem;
   color: #666;
+}
+
+.images-container {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+}
+
+.images-container img {
+  width: 45%;
 }

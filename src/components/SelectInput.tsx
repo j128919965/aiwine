@@ -15,8 +15,8 @@ import React, {
     onChange?: (value: string, isCustomValue?: boolean) => void;
     placeholder?: string;
     animateDuration?: number;
-    allowInput?: boolean;
-    allowCustomValue?: boolean;
+    
+    mode?: 'select-only' | 'input-only' | 'both';
     size?: 'small' | 'medium' | 'large';
     customStyles?: {
       container?: string;
@@ -34,8 +34,7 @@ import React, {
     onChange,
     placeholder = '请选择',
     animateDuration = 300,
-    allowInput = false,
-    allowCustomValue = false,
+    mode = 'both',
     size = 'medium',
     customStyles,
     renderOption
@@ -74,7 +73,7 @@ import React, {
 
     // 过滤选项
     useEffect(() => {
-      if (allowInput && inputValue) {
+      if (mode !== 'select-only' && inputValue) {
         const filtered = options.filter(option => 
           option.label.toLowerCase().includes(inputValue.toLowerCase())
         );
@@ -82,13 +81,17 @@ import React, {
       } else {
         setFilteredOptions(options);
       }
-    }, [inputValue, options, allowInput]);
+    }, [inputValue, options]);
 
     // 处理输入变化
     const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
       setInputValue(newValue);
       setIsOpen(true);
+      // 如果只支持输入，则直接更新输入值
+      if (mode == 'input-only') {
+        onChange?.(newValue);
+      }
       
       // 重置高亮索引
       if (newValue) {
@@ -111,7 +114,7 @@ import React, {
     const handleSubmit = useCallback((e: FormEvent) => {
       e.preventDefault();
       
-      if (allowCustomValue && inputValue) {
+      if (mode !== 'select-only' && inputValue) {
         // 如果允许自定义值且有输入内容
         if (filteredOptions.length === 0) {
           // 没有匹配选项，使用输入值作为自定义值
@@ -145,7 +148,7 @@ import React, {
         setInputValue(selectedOption.label);
         setIsOpen(false);
       }
-    }, [allowCustomValue, inputValue, filteredOptions, onChange, highlightedIndex]);
+    }, [ inputValue, filteredOptions, onChange, highlightedIndex]);
 
 
     // 键盘导航处理
@@ -178,7 +181,7 @@ import React, {
           break;
         case 'Enter':
           e.preventDefault();
-          if (allowCustomValue && inputValue) {
+          if (mode != 'select-only' && inputValue) {
             if (filteredOptions.length === 0) {
               // 没有匹配选项，使用输入值作为自定义值
               onChange?.(inputValue, true);
@@ -226,7 +229,7 @@ import React, {
           setIsOpen(false);
           break;
       }
-    }, [isOpen, highlightedIndex, filteredOptions, options, onChange, value, allowCustomValue, inputValue]);
+    }, [isOpen, highlightedIndex, filteredOptions, options, onChange, value, inputValue]);
   
     // 滚动可视区域
     useEffect(() => {
@@ -252,7 +255,59 @@ import React, {
         onKeyDown={handleKeyDown}
         tabIndex={0}
       >
-        {allowInput ? (
+        {mode === 'input-only' ? (
+          <form onSubmit={handleSubmit}>
+            <InputContainer
+              className={customStyles?.input}
+              isOpen={false}
+              size={size}
+            >
+              <InputElement
+                ref={inputRef}
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange}
+                placeholder={placeholder}
+                autoComplete="off"
+              />
+              {inputValue && (
+                <ClearButton 
+                  type="button"
+                  onClick={handleClearInput}
+                  className={customStyles?.clearButton}
+                  aria-label="清除输入"
+                >
+                  ×
+                </ClearButton>
+              )}
+            </InputContainer>
+          </form>
+        ) : mode === 'select-only' ? (
+          <InputField
+            className={customStyles?.input}
+            onClick={() => setIsOpen(!isOpen)}
+            onTouchEnd={handleTouchInteraction}
+            isOpen={isOpen}
+            size={size}
+          >
+            <span style={{
+              display: "inline-block",
+              width: '100%',
+              textAlign: 'left',
+              paddingLeft: '4px',
+            }}>
+            {value ? options.find(opt => opt.value === value)?.label : <span style={{ color: 'rgba(255, 107, 107, 0.5)' }}>{placeholder}</span>}  
+            </span>
+            <DropdownIndicator 
+              onClick={() => setIsOpen(!isOpen)} 
+              onTouchEnd={(e) => {
+                e.preventDefault();
+                setIsOpen(!isOpen);
+              }}
+            />
+          </InputField>
+        ) : (
+          // mode === 'both'
           <form onSubmit={handleSubmit}>
             <InputContainer
               className={customStyles?.input}
@@ -293,68 +348,47 @@ import React, {
               />
             </InputContainer>
           </form>
-        ) : (
-          <InputField
-            className={customStyles?.input}
-            onClick={() => setIsOpen(!isOpen)}
-            onTouchEnd={handleTouchInteraction}
-            isOpen={isOpen}
-            size={size}
-          >
-            {value ? options.find(opt => opt.value === value)?.label : placeholder}
-            {value && (
-              <ClearButton 
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onChange?.('');
-                }}
-                className={customStyles?.clearButton}
-                aria-label="清除选择"
-              >
-                ×
-              </ClearButton>
-            )}
-          </InputField>
         )}
-  
-        <OptionList
-          ref={listRef}
-          className={customStyles?.optionList}
-          animateDuration={animateDuration}
-          isOpen={isOpen}
-        >
-          {(() => {
-            const displayOptions = [...filteredOptions];
-            if (allowCustomValue && inputValue && filteredOptions.length === 0) {
-              displayOptions.push({
-                value: inputValue,
-                label: `${inputValue}`
-              });
-            }
-            return displayOptions.map((option, index) => (
-              <OptionItem
-                key={option.value}
-                className={customStyles?.optionItem}
-                highlighted={index === highlightedIndex}
-                onClick={() => {
-                  onChange?.(option.value, option.value === inputValue);
-                  setInputValue(option.label.startsWith('创建: ') ? option.value : option.label);
-                  setIsOpen(false);
-                }}
-                onTouchEnd={(e) => {
-                  e.preventDefault();
-                  onChange?.(option.value, option.value === inputValue);
-                  setInputValue(option.label.startsWith('创建: ') ? option.value : option.label);
-                  setIsOpen(false);
-                }}
-                animateDuration={animateDuration}
-              >
-                {renderOption ? renderOption(option) : option.label}
-              </OptionItem>
-            ));
-          })()}
-        </OptionList>
+
+        {mode !== 'input-only' && (
+          <OptionList
+            ref={listRef}
+            className={customStyles?.optionList}
+            animateDuration={animateDuration}
+            isOpen={isOpen}
+          >
+            {(() => {
+              const displayOptions = [...filteredOptions];
+              if (mode === 'both' && inputValue && filteredOptions.length === 0) {
+                displayOptions.push({
+                  value: inputValue,
+                  label: `${inputValue}`
+                });
+              }
+              return displayOptions.map((option, index) => (
+                <OptionItem
+                  key={option.value}
+                  className={customStyles?.optionItem}
+                  highlighted={index === highlightedIndex}
+                  onClick={() => {
+                    onChange?.(option.value, option.value === inputValue);
+                    setInputValue(option.label.startsWith('创建: ') ? option.value : option.label);
+                    setIsOpen(false);
+                  }}
+                  onTouchEnd={(e) => {
+                    e.preventDefault();
+                    onChange?.(option.value, option.value === inputValue);
+                    setInputValue(option.label.startsWith('创建: ') ? option.value : option.label);
+                    setIsOpen(false);
+                  }}
+                  animateDuration={animateDuration}
+                >
+                  {renderOption ? renderOption(option) : option.label}
+                </OptionItem>
+              ));
+            })()}
+          </OptionList>
+        )}
       </Container>
     );
   };
@@ -481,16 +515,14 @@ const InputContainer = styled.div<{ isOpen: boolean; size: string }>`
   `;
   
   const InputField = styled.div<{ isOpen: boolean; size: string }>`
+  display: flex;
+  align-items: center;
   border: 2px solid #ff6b6b;
   background: white;
-  cursor: pointer;
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  user-select: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  cursor: pointer;
   color: #ff6b6b;
-
+  
   ${({ size }) => {
     const styles = getSizeStyles(size as 'small' | 'medium' | 'large');
     return css`
@@ -499,20 +531,19 @@ const InputContainer = styled.div<{ isOpen: boolean; size: string }>`
       border-radius: ${styles.borderRadius};
     `;
   }}
-
+  
   ${({ isOpen }) => isOpen && css`
     box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
     transform: translateY(-2px);
   `}
-
+  
   &:hover {
     border-color: #ff8787;
     transform: translateY(-2px) rotate(-1deg);
   }
 
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+  &::placeholder {
+    color: rgba(255, 107, 107, 0.5);
   }
 `;
   

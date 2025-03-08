@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 import SelectInput from './components/SelectInput'
-import { generateImage } from './ai/comfy'
+import { generateImage, GenerateResponse } from './ai/comfy'
 
 function App() {
-  const [generatedImages, setGeneratedImages] = useState<string[]>([])
+  const [generatedImages, setGeneratedImages] = useState<GenerateResponse>({
+    frontUrl: "http://i-1.gpushare.com:14761/view?filename=ComfyUI_temp_rabex_00002_.png&type=temp",
+    backUrl: "http://i-1.gpushare.com:14761/view?filename=ComfyUI_temp_votop_00002_.png&type=temp"
+  })
   const [isGenerating, setIsGenerating] = useState(false)
   const [error, setError] = useState('')
   const [userData, setUserData] = useState({
@@ -77,6 +80,7 @@ function App() {
   }
 
   const handleGenerateImage = async () => {
+    console.log(userData)
     if (!userData.mbti || !userData.star || !userData.emoji || !userData.name || !userData.alcohol) {
       setError('请填写所有必填字段')
       return
@@ -109,8 +113,7 @@ function App() {
             value={userData.mbti}
             onChange={(value) => handleInputChange('mbti', value)}
             placeholder="请选择或输入MBTI人格"
-            allowInput={true}
-            allowCustomValue={true}
+            mode='select-only'
           />
         </div>
 
@@ -121,8 +124,6 @@ function App() {
             value={userData.star}
             onChange={(value) => handleInputChange('star', value)}
             placeholder="请选择或输入星座"
-            allowInput={true}
-            allowCustomValue={true}
           />
         </div>
 
@@ -133,18 +134,17 @@ function App() {
             value={userData.emoji}
             onChange={(value) => handleInputChange('emoji', value)}
             placeholder="请选择或输入表情"
-            allowInput={true}
-            allowCustomValue={true}
           />
         </div>
 
         <div className="input-group">
           <label>你的名字：</label>
-          <input
-            type="text"
+          <SelectInput
+            options={[]}
             value={userData.name}
-            onChange={(e) => handleInputChange('name', e.target.value)}
+            onChange={(value) => handleInputChange('name', value)}
             placeholder="请输入名字"
+            mode='input-only'
           />
         </div>
 
@@ -155,8 +155,6 @@ function App() {
             value={userData.alcohol}
             onChange={(value) => handleInputChange('alcohol', value)}
             placeholder="请选择或输入酒精度数"
-            allowInput={true}
-            allowCustomValue={true}
           />
         </div>
       </div>
@@ -175,16 +173,19 @@ function App() {
         </div>
       )}
 
-      {generatedImages.length > 0 && (
+      {generatedImages && (
         <div className="images-container">
-          {generatedImages.map((imageUrl, index) => (
-            <img
-              key={index}
-              src={imageUrl}
-              alt={`Generated wine ${index + 1}`}
-              className="generated-image"
-            />
-          ))}
+          <img
+            src={generatedImages.frontUrl}
+            alt={`Generated wine front`}
+            className="generated-image"
+          />
+
+          <img
+            src={generatedImages.backUrl}
+            alt={`Generated wine back`}
+            className="generated-image"
+          />
         </div>
       )}
     </div>

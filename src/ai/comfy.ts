@@ -9,7 +9,7 @@ const COMFY_API = {
 
 type Workflow = any
 
-interface GenerateRequest {
+export interface GenerateRequest {
   // 16 种MBTI人格
   mbti: string,
   // 星座
@@ -20,6 +20,11 @@ interface GenerateRequest {
   name: string,
   // 酒精度数
   alcohol: number
+}
+
+export interface GenerateResponse {
+  frontUrl: string,
+  backUrl: string,
 }
 
 // 创建基础的文生图工作流
@@ -59,7 +64,7 @@ export const generateImage = async (
     pollInterval?: number
     maxAttempts?: number
   } = {}
-): Promise<string[]> => {
+): Promise<GenerateResponse> => {
   const { pollInterval = 1000, maxAttempts = 60 } = options
   const workflow = createTextToImageWorkflow(req)
 
@@ -89,18 +94,19 @@ export const generateImage = async (
 
       if (status.completed && status.status_str === 'success') {
         if (outputs) {
-          // 提取生成的图片路径
-          const images = Object.values(outputs)
-            .filter(node => node.images)
-            .flatMap(node =>
-              node.images.map(img =>
-                `${COMFY_API.BASE_URL}/view?filename=${img.filename}`
-              )
-            )
+          // // 提取生成的图片路径
+          // const images = Object.values(outputs)
+          //   .filter(node => node.images)
+          //   .flatMap(node =>
+          //     node.images.map(img =>
+          //       `${COMFY_API.BASE_URL}/view?filename=${img.filename}`
+          //     )
+          //   )
 
-          return images
+          // return images
+          return extractCard(outputs)
         }
-        return []
+        throw new Error('生成图片失败，没有输出内容')
       }
 
       if (!status.completed) {
@@ -116,4 +122,16 @@ export const generateImage = async (
     }
     throw error
   }
+}
+
+const extractCard : (output: any) => GenerateResponse = (output: any) => {
+  const frontObj = output['89']['images'][0]
+  const backObj = output['109']['images'][0]
+  return {
+    frontUrl: generateImageUrl(frontObj.filename, frontObj.type),
+    backUrl: generateImageUrl(backObj.filename, backObj.type)
+  }
+}
+export const generateImageUrl = (fileName: string, type: string) => {
+  return `${COMFY_API.BASE_URL}/view?filename=${fileName}&type=${type}`
 }

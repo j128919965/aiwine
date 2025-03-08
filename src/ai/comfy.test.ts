@@ -11,6 +11,7 @@ describe('createTextToImageWorkflow', () => {
     };
 
     const result = createTextToImageWorkflow(request);
+    console.log(JSON.stringify(result))
     expect(result["57"]["inputs"]["input_string"]).toBe(request.name);
     expect(result["58"]["inputs"]["input_string"]).toBe(request.mbti);
     expect(result["59"]["inputs"]["input_string"]).toBe(request.star)
