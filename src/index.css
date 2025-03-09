@@ -91,11 +91,11 @@ button:focus-visible {
 
 @font-face {
   font-family: "YouSheBiaoTiHei";
-  src: url('优设标题黑.ttf');
+  src: url('ysbth.ttf');
 }
 :root {
-  --select-font-size: 40px;
-  --select-font-size-small: 30px;
+  --select-font-size: 1.5vw;
+  --select-font-size-small: 1.3vw;
   --input-width: 14vw;
 }
 

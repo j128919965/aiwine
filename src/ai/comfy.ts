@@ -3,7 +3,7 @@ import promptTemplate from './prompt.json'
 
 // ComfyUI API的基础配置
 const COMFY_API = {
-  BASE_URL: 'http://i-1.gpushare.com:14761',
+  BASE_URL: 'http://mars.onethingrobot.com:13843',
   CLIENT_ID: Date.now().toString(),
 }
 
@@ -100,6 +100,10 @@ export const generateImage = async (
         throw new Error('生成图片失败，没有输出内容')
       }
 
+      if (status.status_str === 'error') {
+        throw new Error(`生成图片失败: ${status.messages.join(', ')}`)
+      }
+
       if (!status.completed) {
         attempts++
         await new Promise(resolve => setTimeout(resolve, pollInterval))
@@ -117,7 +121,7 @@ export const generateImage = async (
 
 // TODO real output
 const extractCard: (output: any) => GenerateResponse = (output: any) => {
-  const frontObj = output['89']['images'][0]
+  const frontObj = output['120']['images'][0]
   const backObj = output['109']['images'][0]
   return {
     frontUrl: generateImageUrl(frontObj.filename, frontObj.type),

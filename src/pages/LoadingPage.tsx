@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './LoadingPage.css';
 import { useNavigate } from 'react-router-dom';
-// import {generateImage} from '../ai/comfy'
+import {generateImage} from '../ai/comfy'
 import { GenerateRequest, GenerateResponse } from '../ai/comfy';
 import axios from 'axios';
 
@@ -14,13 +14,13 @@ const LoadingPage: React.FC = () => {
         const queue: number[] = JSON.parse(localStorage.getItem("queue") ?? "[]")
         const taskId = queue[queue.length - 1]
         const req: GenerateRequest = JSON.parse(localStorage.getItem(`userData-${taskId}`) ?? `{}`);
-        // generateImage(req).then((res)=>{
-        //   showResult(taskId, req, res)
-        // })
-        setTimeout(() => showResult(taskId, req,  {
-            frontUrl: 'card_template_front.png',
-            backUrl: 'card_template_back.png'
-        }), 1000)
+        generateImage(req).then((res)=>{
+          showResult(taskId, req, res)
+        }).catch(e => {
+          console.log(e)
+          alert('生成失败，请重试')
+          navigate('/input')
+        })
         console.log("send ai req", req)
     }, [])
 
@@ -41,16 +41,37 @@ const LoadingPage: React.FC = () => {
 
     async function uploadFileFromUrl(fileUrl: string, newFileName: string): Promise<string> {
         try {
-            // 从URL获取文件
-            const response = await fetch(fileUrl);
-            if (!response.ok) throw new Error('获取文件失败');
+            // 使用Image对象加载图片
+            const image = new Image();
+            image.crossOrigin = 'anonymous';
+            
+            const imageLoadPromise = new Promise<HTMLImageElement>((resolve, reject) => {
+                image.onload = () => resolve(image);
+                image.onerror = () => reject(new Error('图片加载失败'));
+                image.src = fileUrl;
+            });
 
+            const loadedImage = await imageLoadPromise;
 
-            // 获取文件内容
-            const blob = await response.blob();
-            const file = new File([blob], newFileName, { type: blob.type });
+            // 使用Canvas转换图片为Blob
+            const canvas = document.createElement('canvas');
+            canvas.width = loadedImage.width;
+            canvas.height = loadedImage.height;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) throw new Error('Canvas context 创建失败');
+            
+            ctx.drawImage(loadedImage, 0, 0);
+            
+            // 转换为Blob
+            const blob = await new Promise<Blob>((resolve, reject) => {
+                canvas.toBlob((blob) => {
+                    if (blob) resolve(blob);
+                    else reject(new Error('Blob 转换失败'));
+                }, 'image/png');
+            });
 
-            // 创建FormData并上传到服务器
+            // 创建File对象并上传
+            const file = new File([blob], newFileName, { type: 'image/png' });
             const formData = new FormData();
             formData.append('file', file);
 
