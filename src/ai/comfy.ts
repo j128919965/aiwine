@@ -13,9 +13,9 @@ export interface GenerateRequest {
   // 16 种MBTI人格
   mbti: string,
   // 星座
-  star: string,
+  zodiac: string,
   // 今日心情
-  emoji: string,
+  mood: string,
   // 用户名字
   name: string,
   // 酒精度数
@@ -32,8 +32,8 @@ export const createTextToImageWorkflow = (req: GenerateRequest): Workflow => {
   return JSON.parse(JSON.stringify(promptTemplate)
     // .replace("897892992933", Math.floor(Math.random() * 1000000).toString())
     .replace("$MBTI", req.mbti)
-    .replace("$STAR", req.star)
-    .replace("$EMOJI", req.emoji)
+    .replace("$ZODIAC", req.zodiac)
+    .replace("$MOOD", req.mood)
     .replace("$NAME", req.name)
     .replace("$ALCOHOL", `${req.alcohol}%`)
   )
@@ -94,15 +94,6 @@ export const generateImage = async (
 
       if (status.completed && status.status_str === 'success') {
         if (outputs) {
-          // // 提取生成的图片路径
-          // const images = Object.values(outputs)
-          //   .filter(node => node.images)
-          //   .flatMap(node =>
-          //     node.images.map(img =>
-          //       `${COMFY_API.BASE_URL}/view?filename=${img.filename}`
-          //     )
-          //   )
-
           // return images
           return extractCard(outputs)
         }
@@ -124,7 +115,8 @@ export const generateImage = async (
   }
 }
 
-const extractCard : (output: any) => GenerateResponse = (output: any) => {
+// TODO real output
+const extractCard: (output: any) => GenerateResponse = (output: any) => {
   const frontObj = output['89']['images'][0]
   const backObj = output['109']['images'][0]
   return {

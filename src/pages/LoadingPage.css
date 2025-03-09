@@ -1,0 +1,43 @@
+.loading-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  color: #fff;
+  background-image: url('/_3_8-_1_5.jpg');
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+.loading-text {
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+.loading-message {
+  font-size: 59px;
+  font-weight: 500;
+  line-height: 71px;
+  height: 71px;
+  letter-spacing: 0em;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  padding: 0 2rem;
+  width: 90vw;
+  max-width: 1200px;
+}

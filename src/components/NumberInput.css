@@ -1,0 +1,82 @@
+.number-wheel-container {
+  position: relative;
+  width: var(--input-width);
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  display: inline-block;
+}
+
+.number-display {
+  margin-bottom: -50px;
+  font-size: var(--select-font-size-small);
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.range-input {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  outline: none;
+}
+
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.range-input::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border: none;
+}
+
+.range-input::-webkit-slider-thumb:hover,
+.range-input::-webkit-slider-thumb:active {
+  transform: scale(1.2);
+}
+
+.range-input::-moz-range-thumb:hover,
+.range-input::-moz-range-thumb:active {
+  transform: scale(1.2);
+}
+
+/* 尺寸变体 */
+.number-wheel-container.small {
+  height: 80px;
+}
+
+.number-wheel-container.small .number-display {
+  font-size: 18px;
+}
+
+.number-wheel-container.small .range-input {
+  height: 3px;
+}
+
+.number-wheel-container.small .range-input::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.number-wheel-container.small .range-input::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+}

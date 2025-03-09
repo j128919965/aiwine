@@ -1,0 +1,51 @@
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.button-container {
+    animation: float 2s ease-in-out infinite;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+.button-container:active {
+    animation: scale 0.2s ease-in-out;
+}
+
+.button-image {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.button-text {
+    position: relative;
+    text-align: center;
+    color: #fff;
+    font-size: 1.2rem;
+    user-select: none;
+    pointer-events: none;
+    font-family: 'YouSheBiaoTiHei';
+}

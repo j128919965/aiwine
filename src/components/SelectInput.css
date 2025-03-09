@@ -1,0 +1,236 @@
+.select-input-container {
+ display: inline-block;
+  position: relative;
+  width: var(--input-width);
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+.input-container:focus {
+  border-bottom-color: #fff;
+}
+
+.input-container.small {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.input-container.large {
+  padding: 14px 18px;
+  font-size: 18px;
+}
+
+.input-container.is-open {
+  border-bottom-color: #fff;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+.input-container:hover {
+  border-bottom-color: #fff;
+  transform: translateY(-2px);
+}
+
+.input-element {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 8px;
+  width: 100%;
+  color: #fff;
+  font-size: var(--select-font-size);
+}
+
+.input-element::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dropdown-indicator {
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #fff;
+  margin-left: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.clear-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 36px;
+  cursor: pointer;
+  padding: 0 16px;
+  margin-right: 8px;
+  line-height: 1;
+  min-width: 48px;
+  min-height: 48px;
+}
+
+.option-item {
+  padding: 24px 32px;
+  font-size: 48px;
+}
+
+.dropdown-indicator:hover {
+  transform: rotate(180deg);
+}
+
+.input-container.is-open .dropdown-indicator {
+  transform: rotate(180deg);
+}
+
+.clear-button {
+  background: none;
+  border: none;
+  color: #fff;
+  /* font-size: 35px; */
+  cursor: pointer;
+  padding: 0 8px;
+  margin-right: 4px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.clear-button:hover,
+.clear-button:active {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: rotate(90deg);
+}
+
+.clear-button:focus {
+  outline: none;
+}
+
+.option-list {
+  position: absolute;
+  width: 100%;
+  max-width: 400px;
+  max-height: 300px;
+  margin: 8px 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity var(--animate-duration) ease, transform var(--animate-duration) ease;
+  z-index: 9999;
+  display: none;
+}
+
+.option-list.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  display: block;
+}
+
+.option-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.option-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.option-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.option-item {
+  padding: 2px 16px;
+  list-style: none;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  font-size: var(--select-font-size-small);
+  font-weight: normal;
+  line-height: 70px;
+}
+
+.option-item.highlighted {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.02) translateX(4px);
+  font-weight: bold;
+}
+
+.option-item:hover,
+.option-item:active {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.02) translateX(4px);
+}
+
+.input-container.error {
+  border-bottom-color: #ff4d4f;
+}
+
+.input-container.error:hover,
+.input-container.error.is-open {
+  border-bottom-color: #ff7875;
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.15);
+}
+
+.input-container.error .input-element {
+  color: #ff4d4f;
+}
+
+.input-container.error .input-element::placeholder {
+  color: rgba(255, 77, 79, 0.5);
+}
+
+.input-container.error .dropdown-indicator {
+  border-top-color: #ff4d4f;
+}
+
+.input-container.error .clear-button {
+  color: #ff4d4f;
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 14px;
+  margin-top: 4px;
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+@media (hover: none) {
+  .input-container:hover {
+    transform: none;
+  }
+  
+  .option-item:hover {
+    transform: none;
+    background-color: transparent;
+  }
+  
+  .option-item:active {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(0.98);
+  }
+}

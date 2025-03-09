@@ -1,12 +1,13 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
 .user-inputs {
-  width: 1000px;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -102,14 +103,4 @@ h1 {
 p {
   margin-bottom: 2rem;
   color: #666;
-}
-
-.images-container {
-  display: flex;
-  justify-content: space-between;
-  width: 1000px;
-}
-
-.images-container img {
-  width: 45%;
 }

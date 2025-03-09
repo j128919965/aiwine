@@ -1,0 +1,80 @@
+.welcome-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  background-image: url('/_3_8-_1_4.jpg');
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.welcome-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 80vw;
+}
+
+.welcome-title {
+  display: flex;
+  gap: 1rem;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.043em;
+  line-height: 19px;
+  color: #2f2019;
+}
+
+.welcome-ai-play {
+  color: #2f2019;
+  height: 19px;
+}
+
+.welcome-alcohol {
+  color: #2f2019;
+  height: 19px;
+}
+
+.welcome-main-text {
+  font-weight: 700;
+  font-size: 36px;
+  letter-spacing: 0.4em;
+  line-height: 43px;
+  height: 43px;
+  color: #000;
+  margin: 0;
+}
+
+.welcome-red-text {
+  color: #ff0000;
+}
+
+.welcome-start-button {
+  padding: 10px 30px;
+  font-size: 35px;
+  font-weight: 500;
+  line-height: 42px;
+  height: 42px;
+  letter-spacing: -0.046em;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.welcome-start-button:hover {
+  transform: scale(1.1);
+}

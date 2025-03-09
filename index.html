@@ -5,6 +5,231 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React + TS</title>
+    <style media="screen,print">
+      #root {
+        width: 100%;
+      }
+      #root .g-artboard {
+        margin:0 auto;
+      }
+      #root p {
+        margin:0;
+      }
+      #root .g-aiAbs {
+        position:absolute;
+      }
+      #root .g-aiImg {
+        position:absolute;
+        top:0;
+        display:block;
+        width:100% !important;
+      }
+      #root .g-aiSymbol {
+        position: absolute;
+        box-sizing: border-box;
+      }
+      #root .g-aiPointText p { white-space: nowrap; }
+      #g-_3_8-_1_3 {
+        position:relative;
+        overflow:hidden;
+      }
+      #g-_3_8-_1_3 p {
+        font-weight:regular;
+        line-height:55px;
+        height:auto;
+        opacity:1;
+        letter-spacing:0em;
+        font-size:46px;
+        text-align:left;
+        color:rgb(255,255,255);
+        text-transform:none;
+        padding-bottom:0;
+        padding-top:0;
+        mix-blend-mode:normal;
+        font-style:normal;
+        position:static;
+      }
+      #g-_3_8-_1_3 .g-pstyle0 {
+        font-weight:500;
+        line-height:71px;
+        height:71px;
+        letter-spacing:0.127em;
+        font-size:59px;
+      }
+      #g-_3_8-_1_3 .g-pstyle1 {
+        font-weight:500;
+        line-height:71px;
+        height:71px;
+        font-size:59px;
+      }
+      #g-_3_8-_1_3 .g-pstyle2 {
+        font-weight:500;
+        height:55px;
+      }
+      #g-_3_8-_1_3 .g-pstyle3 {
+        font-weight:500;
+        line-height:59px;
+        height:59px;
+        letter-spacing:0.075em;
+        font-size:49px;
+      }
+      #g-_3_8-_1_4 {
+        position:relative;
+        overflow:hidden;
+      }
+      #g-_3_8-_1_4 p {
+        font-weight:regular;
+        line-height:19px;
+        height:auto;
+        opacity:1;
+        letter-spacing:-0.043em;
+        font-size:16px;
+        text-align:left;
+        color:rgb(47,32,25);
+        text-transform:none;
+        padding-bottom:0;
+        padding-top:0;
+        mix-blend-mode:normal;
+        font-style:normal;
+        position:static;
+      }
+      #g-_3_8-_1_4 .g-pstyle0 {
+        font-weight:700;
+        height:19px;
+      }
+      #g-_3_8-_1_4 .g-pstyle1 {
+        font-weight:700;
+        line-height:43px;
+        height:43px;
+        letter-spacing:0.4em;
+        font-size:36px;
+        color:rgb(0,0,0);
+      }
+      #g-_3_8-_1_4 .g-pstyle2 {
+        font-weight:500;
+        line-height:42px;
+        height:42px;
+        letter-spacing:-0.046em;
+        font-size:35px;
+        color:rgb(255,255,255);
+      }
+      #g-_3_8-_1_4 .g-cstyle0 {
+        color:rgb(255,0,0);
+      }
+      #g-_3_8-_1_5 {
+        position:relative;
+        overflow:hidden;
+      }
+      #g-_3_8-_1_5 p {
+        font-weight:regular;
+        line-height:71px;
+        height:auto;
+        opacity:1;
+        letter-spacing:0em;
+        font-size:59px;
+        text-align:left;
+        color:rgb(255,255,255);
+        text-transform:none;
+        padding-bottom:0;
+        padding-top:0;
+        mix-blend-mode:normal;
+        font-style:normal;
+        position:static;
+      }
+      #g-_3_8-_1_5 .g-pstyle0 {
+        font-weight:500;
+        height:71px;
+      }
+      #g-_3_8-_1_6 {
+        position:relative;
+        overflow:hidden;
+      }
+      #g-_3_8-_1_6 p {
+        font-weight:regular;
+        line-height:34px;
+        height:auto;
+        opacity:1;
+        letter-spacing:0em;
+        font-size:11px;
+        text-align:left;
+        color:rgb(0,0,0);
+        text-transform:none;
+        padding-bottom:0;
+        padding-top:0;
+        mix-blend-mode:normal;
+        font-style:normal;
+        position:static;
+      }
+      #g-_3_8-_1_6 .g-pstyle0 {
+        font-weight:500;
+        line-height:22px;
+        height:22px;
+        font-size:18px;
+      }
+      #g-_3_8-_1_6 .g-pstyle1 {
+        font-weight:500;
+        line-height:72px;
+        height:72px;
+        font-size:60px;
+      }
+      #g-_3_8-_1_6 .g-pstyle2 {
+        font-weight:500;
+        line-height:15px;
+        height:15px;
+        font-size:12px;
+      }
+      #g-_3_8-_1_6 .g-pstyle3 {
+        font-weight:500;
+        line-height:55px;
+        height:55px;
+        letter-spacing:0.075em;
+        font-size:46px;
+        color:rgb(255,255,255);
+      }
+      #g-_3_8-_1_6 .g-pstyle4 {
+        font-weight:500;
+        line-height:46px;
+        height:46px;
+        font-size:39px;
+      }
+      #g-_3_8-_1_6 .g-pstyle5 {
+        font-weight:500;
+        line-height:30px;
+        height:30px;
+        font-size:19px;
+      }
+      #g-_3_8-_1_6 .g-pstyle6 {
+        font-weight:500;
+        line-height:57px;
+        height:57px;
+        font-size:36px;
+      }
+      #g-_3_8-_1_6 .g-pstyle7 {
+        font-weight:500;
+        line-height:40px;
+        height:40px;
+        font-size:19px;
+      }
+      #g-_3_8-_1_6 .g-pstyle8 {
+        font-weight:500;
+        height:34px;
+      }
+      #g-_3_8-_1_6 .g-pstyle9 {
+        font-weight:500;
+        line-height:57px;
+        height:57px;
+        font-size:36px;
+        text-align:center;
+      }
+      #g-_3_8-_1_6 .g-pstyle10 {
+        font-weight:500;
+        line-height:39px;
+        height:39px;
+        font-size:34px;
+        text-align:center;
+      }
+    
+    </style>
   </head>
   <body>
     <div id="root"></div>

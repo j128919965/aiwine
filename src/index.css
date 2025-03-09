@@ -1,4 +1,20 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+
 :root {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  text-align: center;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -26,8 +42,8 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
 
 h1 {
@@ -65,4 +81,24 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+@font-face {
+  font-family: "pxfont";
+  src: url('fusion-pixel-8px-proportional-zh_hans.otf');
+  /* src: url('pxfont.ttf'); */
+}
+
+@font-face {
+  font-family: "YouSheBiaoTiHei";
+  src: url('优设标题黑.ttf');
+}
+:root {
+  --select-font-size: 40px;
+  --select-font-size-small: 30px;
+  --input-width: 14vw;
+}
+
+.pxfont {
+  font-family: pxfont;
 }
