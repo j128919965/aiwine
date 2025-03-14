@@ -94,11 +94,35 @@ button:focus-visible {
   src: url('ysbth.ttf');
 }
 :root {
-  --select-font-size: 1.5vw;
-  --select-font-size-small: 1.3vw;
-  --input-width: 14vw;
+  --select-font-size: 1.2rem;
+  --select-font-size-small: 1rem;
+  --input-width: 60%;
+  --button-text-size: 1.2rem;
 }
 
 .pxfont {
   font-family: pxfont;
+}
+
+/* 移动端，默认字体变得很大，我需要让它强制变小 */
+@media screen and (max-width: 900px) {
+
+  html {
+    font-size: small;
+  }
+}
+
+/* 移动端，默认字体变得很大，我需要让它强制变小 */
+@media screen and (max-width: 768px) {
+
+  html {
+    font-size: x-small;
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  html {
+    font-size: xx-small;
+  }
 }

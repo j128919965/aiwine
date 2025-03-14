@@ -318,7 +318,9 @@ const SelectInput: React.FC<SelectInputProps> = ({
             width: '100%',
             textAlign: 'left',
             paddingLeft: '4px',
-            fontSize:'var(--select-font-size)'
+            fontSize:'var(--select-font-size)',
+            height: '22px',
+            lineHeight: '22px'
           }}>
             {value ? options.find(opt => opt === value) : <span style={{ color: 'rgba(255, 255, 255, 0.5)' }}>{placeholder}</span>}
           </span>

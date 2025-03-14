@@ -43,7 +43,7 @@ const InputPage: React.FC = () => {
         }
     };
 
-    const handleCancel = ()=>{
+    const handleCancel = () => {
         navigate('/welcome')
     }
 
@@ -110,8 +110,6 @@ const InputPage: React.FC = () => {
             id="g-_3_8-_1_3"
             className="g-artboard"
             style={{
-                maxWidth: '2266px',
-                maxHeight: '1488px',
                 aspectRatio: '1.523',
                 minWidth: '0'
             }}
@@ -122,18 +120,14 @@ const InputPage: React.FC = () => {
                 alt=""
                 src="_3_8-_1_3.jpg"
             />
-            <div
-                id="g-ai0-1"
-                className="g-_1 g-aiAbs g-aiPointText"
-                style={{
-                    top: '19.1112%',
-                    marginTop: '-44.4px',
-                    left: '56.9082%',
-                    width: '241px'
-                }}
-            >
-                <p className="g-pstyle0">
-                    <label className='pxfont'>称 呼：</label>
+            <div className="m-input-container">
+                <div className="m-input-container-toppadding">
+
+                </div>
+                <div
+                    className="g-_1 g-aiPointText m-input-box"
+                >
+                    <label className='pxfont m-input-label' >称 呼：</label>
                     <SelectInput
                         options={[]}
                         value={userData.name}
@@ -142,20 +136,11 @@ const InputPage: React.FC = () => {
                         placeholder="输入称呼"
                         error={!!errors.name}
                     />
-                </p>
-            </div>
-            <div
-                id="g-ai0-2"
-                className="g-_1 g-aiAbs g-aiPointText"
-                style={{
-                    top: '31.0064%',
-                    marginTop: '-44.4px',
-                    left: '56.9082%',
-                    width: '231px'
-                }}
-            >
-                <p className="g-pstyle1">
-                    <label className='pxfont'>MBTI ：</label>
+                </div>
+                <div
+                    className="g-_1 g-aiPointText m-input-box"
+                >
+                    <label className='pxfont m-input-label' >MBTI：</label>
                     <SelectInput
                         options={mbtiOptions}
                         value={userData.mbti}
@@ -163,20 +148,12 @@ const InputPage: React.FC = () => {
                         onChange={(value) => handleInputChange('mbti', value)}
                         placeholder="选择MBTI"
                         error={!!errors.mbti}
-                    /></p>
-            </div>
-            <div
-                id="g-ai0-3"
-                className="g-_1 g-aiAbs g-aiPointText"
-                style={{
-                    top: '42.9015%',
-                    marginTop: '-44.4px',
-                    left: '56.9082%',
-                    width: '241px'
-                }}
-            >
-                <p className="g-pstyle0">
-                    <label className='pxfont'>心 情：</label>
+                    />
+                </div>
+                <div
+                    className="g-_1 g-aiPointText m-input-box"
+                >
+                    <label className='pxfont m-input-label' >心 情：</label>
                     <SelectInput
                         options={moodOptions}
                         value={userData.mood}
@@ -184,22 +161,11 @@ const InputPage: React.FC = () => {
                         placeholder="选择或输入心情"
                         error={!!errors.mood}
                     />
-                </p>
-            </div>
-            <div
-                id="g-ai0-4"
-                className="g-_1 g-aiAbs g-aiPointText"
-                style={{
-                    top: '54.8639%',
-                    marginTop: '-44.4px',
-                    left: '56.9082%',
-                    width: '241px'
-                }}
-            >
-                <p className="g-pstyle0">
-                    <label className="pxfont">
-                        星 座：
-                    </label>
+                </div>
+                <div
+                    className="g-_1 g-aiPointText m-input-box"
+                >
+                    <label className='pxfont m-input-label' >星 座：</label>
                     <SelectInput
                         options={zodiacOptions}
                         value={userData.zodiac}
@@ -207,37 +173,28 @@ const InputPage: React.FC = () => {
                         onChange={(value) => handleInputChange('zodiac', value)}
                         placeholder="选择星座"
                         error={!!errors.zodiac}
-                    /></p>
-            </div>
-            <div
-                id="g-ai0-5"
-                className="g-_1 g-aiAbs g-aiPointText"
-                style={{
-                    top: '66.7591%',
-                    marginTop: '-44.4px',
-                    left: '56.9082%',
-                    width: '258px'
-                }}
-            >
-                <p className="g-pstyle1">
-                    <label className='pxfont'>酒精度：</label>
+                    />
+                </div>
+                <div
+                    className="g-_1 g-aiPointText m-input-box"
+                >
+                    <label className='pxfont m-input-label' >酒精度：</label>
                     <NumberInput
-                        min={5}
-                        max={20}
+                        min={0}
+                        max={40}
                         value={userData.alcohol}
                         onChange={(value) => handleInputChange('alcohol', value)}
                         renderTitle={(value) => `${value}°`}
                     />
-                </p>
+                </div>
             </div>
             <div
                 id="g-ai0-6"
                 className="g-_1 g-aiAbs g-aiPointText"
                 style={{
-                    top: '80.8306%',
-                    marginTop: '-61.8px',
+                    top: '72%',
                     left: '11.3345%',
-                    width: '434px'
+                    width: '15%'
                 }}
             >
                 <p className="g-pstyle2 pxfont">输入你的信息</p>
@@ -246,8 +203,7 @@ const InputPage: React.FC = () => {
             <Button
                 id="g-ai0-7"
                 style={{
-                    top: '79%',
-                    marginTop: '-32.4px',
+                    top: '77%',
                     left: '49%',
                 }} text='返回'
                 textClassName='g-pstyle3'
@@ -257,8 +213,7 @@ const InputPage: React.FC = () => {
             <Button
                 id="g-ai0-7"
                 style={{
-                    top: '79%',
-                    marginTop: '-32.4px',
+                    top: '77%',
                     left: '62%',
                 }} text='开始调酒'
                 textClassName='g-pstyle3'

@@ -44,7 +44,7 @@
     position: relative;
     text-align: center;
     color: #fff;
-    font-size: 1.2rem;
+    font-size: var(--button-text-size);
     user-select: none;
     pointer-events: none;
     font-family: 'YouSheBiaoTiHei';

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './LoadingPage.css';
 import { useNavigate } from 'react-router-dom';
 import {generateImage} from '../ai/comfy'
@@ -9,20 +9,32 @@ const server = 'http://101.34.87.87:3000'
 
 const LoadingPage: React.FC = () => {
     const navigate = useNavigate();
+    const [retryCount, setRetryCount] = useState(0);
 
     useEffect(() => {
-        const queue: number[] = JSON.parse(localStorage.getItem("queue") ?? "[]")
-        const taskId = queue[queue.length - 1]
-        const req: GenerateRequest = JSON.parse(localStorage.getItem(`userData-${taskId}`) ?? `{}`);
-        generateImage(req).then((res)=>{
-          showResult(taskId, req, res)
-        }).catch(e => {
-          console.log(e)
-          alert('生成失败，请重试')
-          navigate('/input')
-        })
-        console.log("send ai req", req)
-    }, [])
+        const generateWithRetry = async () => {
+            const queue: number[] = JSON.parse(localStorage.getItem("queue") ?? "[]");
+            const taskId = queue[queue.length - 1];
+            const req: GenerateRequest = JSON.parse(localStorage.getItem(`userData-${taskId}`) ?? `{}`);
+            
+            try {
+                const res = await generateImage(req);
+                showResult(taskId, req, res);
+            } catch (e) {
+                console.log(e);
+                if (retryCount < 2) {
+                    setRetryCount(prev => prev + 1);
+                    generateWithRetry();
+                } else {
+                    alert('生成失败，请重试');
+                    navigate('/input');
+                }
+            }
+            console.log("send ai req", req);
+        };
+
+        generateWithRetry();
+    }, [retryCount]);
 
     const showResult = async (taskId: number, req: GenerateRequest, result: GenerateResponse) => {
         localStorage.setItem(`result-${taskId}`, JSON.stringify(result));
@@ -124,8 +136,9 @@ const LoadingPage: React.FC = () => {
                 style={{
                     top: "87.5924%",
                     marginTop: "-44.4px",
-                    left: "18.369%",
-                    width: "1499px"
+                    width: "100%",
+                    display: 'flex',
+                    justifyContent:'center'
                 }}
             >
                 <p className="g-pstyle0 pxfont">好的，现在让我为你调制一款专属于你当下的鸡尾酒吧！</p>

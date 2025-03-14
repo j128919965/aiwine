@@ -1,7 +1,6 @@
 .number-wheel-container {
   position: relative;
   width: var(--input-width);
-  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,11 +10,14 @@
 }
 
 .number-display {
-  margin-bottom: -50px;
+  position: absolute;
   font-size: var(--select-font-size-small);
   color: #fff;
   font-weight: bold;
   text-align: center;
+  font-size: 0.8rem;
+  left: 45%;
+  top: -15px;
 }
 
 .range-input {

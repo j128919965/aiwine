@@ -30,7 +30,7 @@ const ResultPage = () => {
                 navigate('/welcome')
              }}
              style={{
-                top: "32.7614%", marginTop: "-34.5px", left: "84.5%",
+                top: "30.7614%", left: "84.5%",
              }}
              />
 

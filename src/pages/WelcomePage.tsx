@@ -75,10 +75,16 @@ const WelcomePage: React.FC = () => {
                 id="g-ai1-3" 
                 className="g-_1 g-aiAbs g-aiPointText" 
                 style={{
-                    top: '59.8244%',
-                    marginTop: '-38.2px',
+                    top: '56.7%',
                     left: '56.2948%',
-                    width: '510px'
+                    width: '30%',
+                    lineHeight: '4%',
+                    height : '4%',
+                    fontSize: '1rem',
+                    color: 'black',
+                    display: 'flex',
+                    alignItems: 'center'
+                    
                 }}
             >
                 <p className="g-pstyle1">MBTI定制化<span className="g-cstyle0">AI</span> 调酒！</p>
@@ -87,7 +93,6 @@ const WelcomePage: React.FC = () => {
                 id="g-ai1-4" 
                 style={{
                     top: '69.5661%',
-                    marginTop: '-23px',
                     left: '58.6384%',
                 }}
                 text='GET START'

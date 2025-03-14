@@ -1,0 +1,28 @@
+.m-input-box {
+    display: flex;
+    color: white;
+    height: 10.5%;
+    line-height: 10.5%;
+    font-size: 1.5rem;
+    align-items: center;
+    margin-bottom: 3.5%;
+
+    --input-size: 65%
+}
+
+.m-input-label {
+    display: inline-block;
+    width: 35%;
+}
+
+.m-input-container {
+    position: relative;
+    left: 56%;
+    height: 100%;
+    width: 30%;
+    /* padding-top: 9%; */
+}
+
+.m-input-container-toppadding {
+    height: 13%;
+}
